@@ -41,10 +41,10 @@ Sprite::Sprite(/*const char* a_cpType,*/ const char* a_cpTexture, /*float a_fShe
 	m_aoVerts[2].Color = m_v4SpriteColor;
 	m_aoVerts[3].Color = m_v4SpriteColor;
 
-	m_aoVerts[0].UV = Vector3(0.0f, 0.0f, 1.0f);
-	m_aoVerts[1].UV = Vector3(1.0f, 0.0f, 1.0f);
-	m_aoVerts[2].UV = Vector3(0.0f, 1.0f, 1.0f);
-	m_aoVerts[3].UV = Vector3(1.0f, 1.0f, 1.0f);
+	m_aoVerts[0].UV = Vec2(0.0f, 0.0f);
+	m_aoVerts[1].UV = Vec2(1.0f, 0.0f);
+	m_aoVerts[2].UV = Vec2(0.0f, 1.0f);
+	m_aoVerts[3].UV = Vec2(1.0f, 1.0f);
 
 	//m_aoVerts[0].UV[0] = 0.0f;m_aoVerts[0].UV[1] = 0.0f;
 	//m_aoVerts[1].UV[0] = 1.0f;m_aoVerts[1].UV[1] = 0.0f;
@@ -87,11 +87,11 @@ Sprite::Sprite(/*const char* a_cpType,*/ const char* a_cpTexture, /*float a_fShe
 	matrix_location = glGetUniformLocation (m_ShaderProgram, "matrix");
 
 	m_uiTexture = 0;
-	m_minUVCoords = Vector3(0.f, 0.f, 0.f);
-	m_maxUVCoords = Vector3(1.f, 1.f, 0.f); //???
+	m_minUVCoords = Vec2(0.0f, 0.0f);
+	m_maxUVCoords = Vec2(1.0f, 1.0f);
 	
-	m_uvScale = Vector3(1.f, 1.f, 1.f);
-	m_uvOffset = Vector3(0.f, 0.f, 0.f);
+	/*m_uvScale = Vector3(1.f, 1.f, 1.f);
+	m_uvOffset = Vector3(0.f, 0.f, 0.f);*/
 
 	m_uSourceBlendMode = GL_SRC_ALPHA;
 	m_uDestinationBlendMode = GL_ONE_MINUS_SRC_ALPHA;

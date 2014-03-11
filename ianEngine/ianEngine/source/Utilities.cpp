@@ -35,3 +35,19 @@ mat->m24 = ((a_fBottom + a_fTop)/(a_fBottom - a_fTop));
 mat->m34 = (-(a_fNear + a_fFar)/(a_fFar - a_fNear));
 mat->m44 = 1.f;
 }
+
+
+Vec2::Vec2()
+{}
+
+Vec2::Vec2(float x, float y)
+{
+	fX = x;
+	fY = y;
+}
+
+void Vec2::operator = (const Vec2& a_rVecSource)
+{
+	fX = a_rVecSource.fX;
+	fY = a_rVecSource.fY;
+}

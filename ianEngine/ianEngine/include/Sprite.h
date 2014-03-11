@@ -41,6 +41,7 @@ public:
 
 	void UVSetup(float a_fSheetSlices);
 	
+	GLFWwindow * GameWindow;
 
 private:
 	Vertex m_aoVerts[4];
@@ -51,10 +52,10 @@ private:
 	Vector4 m_v4SpriteColor;
 
 	unsigned int m_uiTexture;
-	GLFWwindow * GameWindow;
+	
 	// used later
-	Vector3 m_minUVCoords;
-	Vector3 m_maxUVCoords;
+	Vec2 m_minUVCoords;
+	Vec2 m_maxUVCoords;
 	Vector3 m_uvScale;
 	Vector3 m_uvOffset;
 
@@ -62,7 +63,7 @@ private:
 	unsigned int m_uDestinationBlendMode;
 	int tex_loc, matrix_location, proj_location;
 
-	vector<UV> m_vSpriteSheet;
+	//vector<UV> m_vSpriteSheet;
 };
 
 #endif

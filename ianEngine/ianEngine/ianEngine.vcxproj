@@ -65,6 +65,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimSprite.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\GLlog.cpp" />
