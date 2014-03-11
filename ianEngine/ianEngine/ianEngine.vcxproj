@@ -69,17 +69,16 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\GLlog.cpp" />
     <ClCompile Include="source\Quad.cpp" />
-    <ClCompile Include="source\Sprite.cpp" />
+    <ClCompile Include="source\Entity.cpp" />
     <ClCompile Include="source\TextFileReader.cpp" />
     <ClCompile Include="source\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimSprite.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="include\GLlog.h" />
     <ClInclude Include="include\MathLibrary.h" />
     <ClInclude Include="include\Quad.h" />
-    <ClInclude Include="include\Sprite.h" />
+    <ClInclude Include="include\Entity.h" />
     <ClInclude Include="include\TextFileReader.h" />
     <ClInclude Include="include\Utilities.h" />
     <ClInclude Include="SpriteManager.h" />

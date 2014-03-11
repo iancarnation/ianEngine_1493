@@ -2,17 +2,14 @@
 #define _SPRITE_H_
 
 #include "Quad.h"
-#include "MathLibrary.h"
 #include "Utilities.h"
-#include <SOIL.h>
-#include <vector>
 
-class Sprite: public Quad
+class Entity: public Quad
 {
 public:
-	Sprite(void);
-	~Sprite(void);
-	Sprite(const char* a_cpTexture, int a_iWidth, int a_iHeight, Vector4 color, GLFWwindow*
+	Entity(void);
+	~Entity(void);
+	Entity(const char* a_cpTexture, int a_iWidth, int a_iHeight, Vector4 color, GLFWwindow*
     /*optional params , Vector3 a_v3Velocity = Vector3(0,0,0), Vector3 a_v3Force = Vector3(0,0,0)*/); // temp starter..add variables below once needed, **move to AnimatedSprite later? **
 	//Sprite(const char*, const char*, Vector3, Vector3, Vector4, Vector3, float, bool, GLFWwindow*);
 
@@ -36,33 +33,30 @@ public:
 
 	// ---------------------------------------------------******
 
-	void Draw();
+	virtual void Draw();
 	void Input();
 
-	void UVSetup(float a_fSheetSlices);
-	
+	void SetPosition(Vector3 a_v3Pos);
+	void SetVertexData(Vertex* a_vertexData);
+	const Vertex* GetVertexData() const;
 
-private:
-	Vertex m_aoVerts[4];
-	Matrix4 * modelMatrix;
+	Vector3 m_v3Position;
+
+protected: 
 
 	Vector3 m_v3Scale;
-	Vector3 m_v3Position;
 	Vector4 m_v4SpriteColor;
-
-	unsigned int m_uiTexture;
-	GLFWwindow * GameWindow;
-	// used later
-	Vector3 m_minUVCoords;
-	Vector3 m_maxUVCoords;
-	Vector3 m_uvScale;
-	Vector3 m_uvOffset;
-
-	unsigned int m_uSourceBlendMode;
-	unsigned int m_uDestinationBlendMode;
-	int tex_loc, matrix_location, proj_location;
-
-	vector<UV> m_vSpriteSheet;
 };
+
+
+inline void Entity::SetVertexData(Vertex* a_vertexData)  // why inline...reason for memcpy?
+{
+	memcpy(&m_aoVerts, a_vertexData, sizeof(Vertex) * 4);
+}
+
+inline const Vertex* Entity::GetVertexData() const	// ?
+{
+	return static_cast<const Vertex*>(m_aoVerts);	// ?
+}
 
 #endif

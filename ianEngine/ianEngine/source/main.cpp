@@ -1,13 +1,11 @@
 #include <gl\glew.h>
-
 #define GLFW_DLL
 #include <GLFW\glfw3.h>
 
 #include <assert.h>
 #include <stdio.h>
-#include "Utilities.h"
-#include "Quad.h"
-#include "Sprite.h"
+
+#include "Entity.h"
 
 // a call-back function
 void glfw_window_size_callback (GLFWwindow* window, int width, int height) {
@@ -81,32 +79,13 @@ int main()
 	glEnable (GL_DEPTH_TEST); // enable depth-testing
 	glDepthFunc (GL_LESS); // depth-testing interprets a smaller value as "closer"
 
-	float speed = 1.0f; // move at 1 unit per second
-	float last_position = 0.0f;
-
-	//Quad * tester = new Quad();
-
-	Sprite * richard = new Sprite("./resources/simmons.png", 384, 324, Vector4(1,1,1,1), window); 
-
-
-	//int matrix_location = glGetUniformLocation (shaderProgram, "matrix");
-	//glUniform1i(glGetUniformLocation(shaderProgram, "Texture"), 0);
-
 	Ortho = new Matrix4();
 	Orthographic(0, g_gl_width, g_gl_height, 0, 0, -1, Ortho);
 
-	while (!glfwWindowShouldClose (window)) {
+	//Quad * tester = new Quad();
+	Entity * richard = new Entity("./resources/simmons.png", 384, 324, Vector4(1,1,1,1), window); 
 
-		/* add a timer for doing animation
-  static double previous_seconds = glfwGetTime ();
-  double current_seconds = glfwGetTime ();
-  double elapsed_seconds = current_seconds - previous_seconds;
-  previous_seconds = current_seconds;
-   // reverse direction when going to far left or right
-  if (fabs(last_position) > 1.0f) {
-    speed = -speed;
-  }
-  */
+	while (!glfwWindowShouldClose (window)) {
 
 		glEnable (GL_CULL_FACE); // cull face
 		glCullFace (GL_BACK); // cull back face
@@ -117,20 +96,6 @@ int main()
 		//resize window
 		glViewport (0, 0, g_gl_width, g_gl_height);
 
-	
-		
-		  // update the matrix
-//  matrix[12] = elapsed_seconds * speed + last_position;
-//  last_position = matrix[12];
-		//set the shader for this VAO
-//		glUseProgram (shaderProgram);
-		//Here is where we attach the marix
-//		glUniformMatrix4fv (matrix_location, 1, GL_FALSE, matrix);
-		//bind the VAO to be drawn
-//		glBindVertexArray (VAO);
-		// draw points 0-3 from the currently bound VAO with current in-use shader
-//		glDrawArrays (GL_TRIANGLES, 0, 3);
-
 		richard->Input();
 		richard->Draw();
 
@@ -138,7 +103,6 @@ int main()
 		glfwPollEvents ();
 		// put the stuff we've been drawing onto the display
 		glfwSwapBuffers (window);
-
 
 		//When do i exit?
 		if (GLFW_PRESS == glfwGetKey (window, GLFW_KEY_ESCAPE)) {
