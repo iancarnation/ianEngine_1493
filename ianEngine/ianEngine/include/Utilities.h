@@ -1,15 +1,10 @@
-#pragma once
 #ifndef _UTILITIES_H_
 #define _UTILITIES_H_
 
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
-#include "GLlog.h"
 
 #include "MathLibrary.h"
-#include "TextFileReader.h"
-#include <SOIL.h>
-
 #include <vector>
 #include <map>
 

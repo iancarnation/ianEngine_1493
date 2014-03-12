@@ -30,7 +30,7 @@ public:
 	AnimSprite(/*const char* a_cpType,*/ const char* a_cpTexture, int a_iWidth, int a_iHeight, Vector4 a_v4Color, 
 			   /*Vector3 a_v3Velocity,*/ /*Vector3 a_v3Force(gone with new physics?),*/ /*float a_fMass,*/ /*float a_fMovementPower(move to Entity child),*/ /*bool a_bAlive,*/ GLFWwindow* window);
 
-	/*virtual*/ void Draw(); // ** Justin made virtual..figure out why **
+	void Draw(); // ** Justin made virtual..figure out why **
 	void Update();
 	void SetSlice();
 	void SetAnimation(std::string animation, AnimCycle cycle, int frame);
