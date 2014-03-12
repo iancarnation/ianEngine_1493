@@ -2,10 +2,7 @@
 #define _SPRITE_H_
 
 #include "Quad.h"
-#include "MathLibrary.h"
-#include "Utilities.h"
-#include <SOIL.h>
-#include <vector>
+#include <Utilities.h>
 
 class Sprite: public Quad
 {
@@ -36,32 +33,36 @@ public:
 
 	// ---------------------------------------------------******
 
-	void Draw();
+	/*virtual*/ void Draw();
 	void Input();
 
-	void UVSetup(float a_fSheetSlices);
+	//void UVSetup(float a_fSheetSlices);
 	
-	GLFWwindow * GameWindow;
+	// GLFWwindow * GameWindow;
 
-private:
-	Vertex m_aoVerts[4];
-	Matrix4 * modelMatrix;
+	Vector3 m_v3Position;
+
+protected:
+	//Vertex m_aoVerts[4];
+	//Matrix4 * modelMatrix;
+
+	
 
 	Vector3 m_v3Scale;
-	Vector3 m_v3Position;
+	
 	Vector4 m_v4SpriteColor;
 
 	unsigned int m_uiTexture;
 	
 	// used later
-	Vec2 m_minUVCoords;
-	Vec2 m_maxUVCoords;
-	Vector3 m_uvScale;
-	Vector3 m_uvOffset;
+	//Vec2 m_minUVCoords;
+	//Vec2 m_maxUVCoords;
+	//Vector3 m_uvScale;
+	//Vector3 m_uvOffset;
 
-	unsigned int m_uSourceBlendMode;
+	/*unsigned int m_uSourceBlendMode;
 	unsigned int m_uDestinationBlendMode;
-	int tex_loc, matrix_location, proj_location;
+	int tex_loc, matrix_location, proj_location;*/
 
 	//vector<UV> m_vSpriteSheet;
 };
