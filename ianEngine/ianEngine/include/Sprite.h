@@ -43,7 +43,7 @@ public:
 	
 	GLFWwindow * GameWindow;
 
-private:
+// private:
 	Vertex m_aoVerts[4];
 	Matrix4 * modelMatrix;
 

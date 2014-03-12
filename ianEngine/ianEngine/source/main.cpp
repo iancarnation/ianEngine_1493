@@ -8,6 +8,7 @@
 #include "Utilities.h"
 #include "Quad.h"
 #include "Sprite.h"
+#include "AnimSprite.h"
 
 // a call-back function
 void glfw_window_size_callback (GLFWwindow* window, int width, int height) {
@@ -87,7 +88,7 @@ int main()
 	//Quad * tester = new Quad();
 
 	Sprite * richard = new Sprite("./resources/simmons.png", 384, 324, Vector4(1,1,1,1), window); 
-
+	AnimSprite* tester = new AnimSprite("./resources/sheet.xml", window);
 
 	//int matrix_location = glGetUniformLocation (shaderProgram, "matrix");
 	//glUniform1i(glGetUniformLocation(shaderProgram, "Texture"), 0);

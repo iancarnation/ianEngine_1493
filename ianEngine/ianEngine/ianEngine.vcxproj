@@ -38,8 +38,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)/include;$(ProjectDir)\libs\glfw\include;$(ProjectDir)\libs\glew\include;$(ProjectDir)\libs\MathLibrary\include;$(ProjectDir)\libs\SOIL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\libs\glfw\lib-msvc110;$(ProjectDir)\libs\glew\lib;$(ProjectDir)\libs\MathLibrary\lib;$(ProjectDir)\libs\SOIL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)/include;$(ProjectDir)\libs\glfw\include;$(ProjectDir)\libs\glew\include;$(ProjectDir)\libs\MathLibrary\include;$(ProjectDir)\libs\SOIL\include;$(ProjectDir)/libs/tinyxml2/include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\libs\glfw\lib-msvc110;$(ProjectDir)\libs\glew\lib;$(ProjectDir)\libs\MathLibrary\lib;$(ProjectDir)\libs\SOIL\lib;$(ProjectDir)/libs/tinyxml2/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -48,7 +48,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;glew32.lib;MathLibrary.lib;soil.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;glew32.lib;MathLibrary.lib;soil.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -65,8 +65,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AnimSprite.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="source\AnimSprite.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\GLlog.cpp" />
     <ClCompile Include="source\Quad.cpp" />
@@ -75,8 +75,8 @@
     <ClCompile Include="source\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimSprite.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="include\AnimSprite.h" />
     <ClInclude Include="include\GLlog.h" />
     <ClInclude Include="include\MathLibrary.h" />
     <ClInclude Include="include\Quad.h" />

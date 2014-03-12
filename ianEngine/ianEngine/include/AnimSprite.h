@@ -3,6 +3,7 @@
 
 #include "Utilities.h"
 #include "Sprite.h"
+#include <tinyxml2.h>
 
 // represents a single image on the sprite sheet
 struct AniSlice
@@ -27,7 +28,7 @@ class AnimSprite: public Sprite
 public:
 	AnimSprite();
 	~AnimSprite();
-	AnimSprite(/*const char* a_cpType,*/ const char* a_cpTexture, int a_iWidth, int a_iHeight, Vector4 a_v4Color, 
+	AnimSprite(/*const char* a_cpType,*/ const char* a_cpTexture,
 			   /*Vector3 a_v3Velocity,*/ /*Vector3 a_v3Force(gone with new physics?),*/ /*float a_fMass,*/ /*float a_fMovementPower(move to Entity child),*/ /*bool a_bAlive,*/ GLFWwindow* window);
 
 	void Draw(); // ** Justin made virtual..figure out why **
@@ -41,6 +42,7 @@ public:
 
 	std::map<std::string, AniSlice> m_mSprites;
 	std::map<std::string, sequence> m_mAnimations;
+	Atlas m_atlas;
 
 	std::string currentAnimation, currentSlice;
 	int iCurrentFrame, iPlayHead;
