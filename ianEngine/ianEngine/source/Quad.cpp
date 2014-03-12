@@ -47,59 +47,59 @@ Quad::Quad(void)
 
 	glUseProgram(m_ShaderProgram);
 
-	// Vertex Data
-	m_aoVerts[0].Pos = Vector3(-0.5f, 0.5f, 0.0f);
-	m_aoVerts[1].Pos = Vector3( 0.5f, 0.5f, 0.0f);
-	m_aoVerts[2].Pos = Vector3(-0.5f,-0.5f, 0.0f);
-	m_aoVerts[3].Pos = Vector3( 0.5f,-0.5f, 0.0f);
-	
-	SetColor(Vector4(1,1,1,1));
+	//// Vertex Data
+	//m_aoVerts[0].Pos = Vector3(-0.5f, 0.5f, 0.0f);
+	//m_aoVerts[1].Pos = Vector3( 0.5f, 0.5f, 0.0f);
+	//m_aoVerts[2].Pos = Vector3(-0.5f,-0.5f, 0.0f);
+	//m_aoVerts[3].Pos = Vector3( 0.5f,-0.5f, 0.0f);
+	//
+	//SetColor(Vector4(1,1,1,1));
 
-	m_aoVerts[0].UV = Vec2(0.0f, 0.0f);
-	m_aoVerts[1].UV = Vec2(1.0f, 0.0f);
-	m_aoVerts[2].UV = Vec2(0.0f, 1.0f);
-	m_aoVerts[3].UV = Vec2(1.0f, 1.0f);
+	//m_aoVerts[0].UV = Vec2(0.0f, 0.0f);
+	//m_aoVerts[1].UV = Vec2(1.0f, 0.0f);
+	//m_aoVerts[2].UV = Vec2(0.0f, 1.0f);
+	//m_aoVerts[3].UV = Vec2(1.0f, 1.0f);
 
-	GLuint elements[] = {0,1,2,3};
+	//GLuint elements[] = {0,1,2,3};
 
-	// Generate Buffers
-	glGenBuffers(1, &m_VBO);
-	glGenBuffers(1, &m_EBO);
-	glGenVertexArrays(1, &m_VAO);
+	//// Generate Buffers
+	//glGenBuffers(1, &m_VBO);
+	//glGenBuffers(1, &m_EBO);
+	//glGenVertexArrays(1, &m_VAO);
 
-	// Bind Buffers
-	glBindVertexArray(m_VAO);	
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
+	//// Bind Buffers
+	//glBindVertexArray(m_VAO);	
+	//glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
 
-	// Put data into buffers
-	glBufferData(GL_ARRAY_BUFFER, 4* sizeof(Vertex), m_aoVerts, GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);	
+	//// Put data into buffers
+	//glBufferData(GL_ARRAY_BUFFER, 4* sizeof(Vertex), m_aoVerts, GL_STATIC_DRAW);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);	
 
-	// Specify layout of vertex data
-	GLint posAttrib = glGetAttribLocation(m_ShaderProgram, "position");
-	glEnableVertexAttribArray(posAttrib);
-	GLint colAttrib = glGetAttribLocation(m_ShaderProgram, "color");
-	glEnableVertexAttribArray(colAttrib);
-	GLint uvAttrib = glGetAttribLocation(m_ShaderProgram, "texcoord");
-	glEnableVertexAttribArray(uvAttrib);
+	//// Specify layout of vertex data
+	//GLint posAttrib = glGetAttribLocation(m_ShaderProgram, "position");
+	//glEnableVertexAttribArray(posAttrib);
+	//GLint colAttrib = glGetAttribLocation(m_ShaderProgram, "color");
+	//glEnableVertexAttribArray(colAttrib);
+	//GLint uvAttrib = glGetAttribLocation(m_ShaderProgram, "texcoord");
+	//glEnableVertexAttribArray(uvAttrib);
 
-	glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-	glVertexAttribPointer(colAttrib, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3 * sizeof(GLfloat)));
-	glVertexAttribPointer(uvAttrib,  2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(7 * sizeof(float)));
+	//glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+	//glVertexAttribPointer(colAttrib, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3 * sizeof(GLfloat)));
+	//glVertexAttribPointer(uvAttrib,  2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(7 * sizeof(float)));
 
-	glBindVertexArray(0);
+	//glBindVertexArray(0);
 
 
-	modelMatrix = new Matrix4();
-	viewMatrix = new Matrix4();
-	MVP = new Matrix4();
+	//modelMatrix = new Matrix4();
+	//viewMatrix = new Matrix4();
+	//MVP = new Matrix4();
 
-	*modelMatrix = modelMatrix->CreateIdentity();
-	*viewMatrix = viewMatrix->CreateIdentity();
-	*MVP = MVP->CreateIdentity();
+	//*modelMatrix = modelMatrix->CreateIdentity();
+	//*viewMatrix = viewMatrix->CreateIdentity();
+	//*MVP = MVP->CreateIdentity();
 
-	matrix_location = glGetUniformLocation (m_ShaderProgram, "matrix");
+	//matrix_location = glGetUniformLocation (m_ShaderProgram, "matrix");
 }
 
 Quad::~Quad()

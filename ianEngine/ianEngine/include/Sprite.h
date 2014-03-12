@@ -60,9 +60,9 @@ protected:
 	//Vector3 m_uvScale;
 	//Vector3 m_uvOffset;
 
-	/*unsigned int m_uSourceBlendMode;
+	unsigned int m_uSourceBlendMode;
 	unsigned int m_uDestinationBlendMode;
-	int tex_loc, matrix_location, proj_location;*/
+	int tex_loc, matrix_location, proj_location;
 
 	//vector<UV> m_vSpriteSheet;
 };
