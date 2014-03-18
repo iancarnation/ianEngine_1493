@@ -3,8 +3,12 @@
 
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
+#include "GLlog.h"
+
+#include "TextFileReader.h"
 
 #include "MathLibrary.h"
+#include <SOIL.h>
 #include <vector>
 #include <map>
 
@@ -13,7 +17,8 @@ struct Vec2
 	Vec2();
 	Vec2(float x, float y);
 
-	void operator = (const Vec2& a_rVecSource);
+	Vec2 operator = (const Vec2& a_rVecSource);
+	//Vec2 operator / (const Vec2& a_rV2);
 
 	float fX, fY;
 };
@@ -59,5 +64,8 @@ enum AnimCycle
 
 void Orthographic(float a_fLeft, float a_fRight, float a_fTop, float a_fBottom, 
 				  float a_fNear, float a_fFar, Matrix4 * mat);
+
+double getDeltaTime();
+void resetDeltaTime();
 
 #endif

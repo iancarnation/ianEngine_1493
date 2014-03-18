@@ -79,7 +79,9 @@ Quad::Quad(void)
 		{
 			0,1,2,3
 		};
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);		
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);	
+
+
 }
 
 Quad::~Quad()
@@ -92,7 +94,7 @@ void Quad::Draw()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
 	glBindVertexArray(m_VAO);
 
-	glDrawElements(GL_TRIANGLE_STRIP, 6, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, 0);
 }
 
 void Quad::LoadVertShader(const char* filePath){
@@ -120,3 +122,4 @@ void Quad::LinkShaders()
 	glUseProgram(m_ShaderProgram);
 	printShaderInfoLog(m_FragmentShader);
 }
+

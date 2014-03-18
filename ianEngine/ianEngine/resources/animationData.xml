@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<animation name="move E" fps="15">
+	<frame name="move E 0"/>
+	<frame name="move E 1"/>
+	<frame name="move E 2"/>
+	<frame name="move E 3"/>
+	<frame name="move E 4"/>
+	<frame name="move E 5"/>
+	<frame name="move E 6"/>
+	<frame name="move E 7"/>
+	<frame name="move E 8"/>
+</animation>
+<animation name="move N" fps="15">
+	<frame name="move N 0"/>
+	<frame name="move N 1"/>
+	<frame name="move N 2"/>
+	<frame name="move N 3"/>
+	<frame name="move N 4"/>
+	<frame name="move N 5"/>
+	<frame name="move N 6"/>
+	<frame name="move N 7"/>
+	<frame name="move N 8"/>
+</animation>
+<animation name="move NE" fps="15">
+	<frame name="move NE 0"/>
+	<frame name="move NE 1"/>
+	<frame name="move NE 2"/>
+	<frame name="move NE 3"/>
+	<frame name="move NE 4"/>
+	<frame name="move NE 5"/>
+	<frame name="move NE 6"/>
+	<frame name="move NE 7"/>
+	<frame name="move NE 8"/>
+</animation>
+<animation name="move S" fps="15">
+	<frame name="move S 0"/>
+	<frame name="move S 1"/>
+	<frame name="move S 2"/>
+	<frame name="move S 3"/>
+	<frame name="move S 4"/>
+	<frame name="move S 5"/>
+	<frame name="move S 6"/>
+	<frame name="move S 7"/>
+	<frame name="move S 8"/>
+</animation>
+<animation name="move SE" fps="15">
+	<frame name="move SE 0"/>
+	<frame name="move SE 1"/>
+	<frame name="move SE 2"/>
+	<frame name="move SE 3"/>
+	<frame name="move SE 4"/>
+	<frame name="move SE 5"/>
+	<frame name="move SE 6"/>
+	<frame name="move SE 7"/>
+	<frame name="move SE 8"/>
+</animation>

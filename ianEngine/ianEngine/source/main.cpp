@@ -86,8 +86,8 @@ int main()
 	float last_position = 0.0f;
 
 	//Quad * tester = new Quad();
-
-	Sprite * richard = new Sprite("./resources/simmons.png", 384, 324, Vector4(1,1,1,1), window); 
+	
+	//Sprite * richard = new Sprite("./resources/simmons.png", 384, 324, Vector4(1,1,1,1), window); 
 	AnimSprite* tester = new AnimSprite("./resources/sheet.xml", window);
 
 	//int matrix_location = glGetUniformLocation (shaderProgram, "matrix");
@@ -132,9 +132,9 @@ int main()
 		// draw points 0-3 from the currently bound VAO with current in-use shader
 //		glDrawArrays (GL_TRIANGLES, 0, 3);
 
-		richard->Input();
-		richard->Draw();
-
+		//richard->Input();
+		//richard->Draw();
+		tester->Draw();
 		// update other events like input handling 
 		glfwPollEvents ();
 		// put the stuff we've been drawing onto the display

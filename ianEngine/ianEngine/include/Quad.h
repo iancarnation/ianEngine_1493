@@ -1,9 +1,7 @@
 #ifndef _QUAD_
 #define _QUAD_
 
-#include <GL/glew.h>
-#include "GLlog.h"
-#include "TextFileReader.h"
+#include "Utilities.h"
 
 class Quad
 {
@@ -16,6 +14,7 @@ public:
 	GLuint m_FragmentShader;
 	GLuint m_VertexShader;
 	GLuint m_ShaderProgram;
+
 
 	void Draw();
 	void LoadVertShader(const char* filePath);

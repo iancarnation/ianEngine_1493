@@ -38,14 +38,17 @@ public:
 
 	void Draw();
 	void Input();
+	void LoadTexture(const char* a_cpTexture);
 
-	void UVSetup(float a_fSheetSlices);
+	void UVSetup();
 	
 	GLFWwindow * GameWindow;
 
 // private:
 	Vertex m_aoVerts[4];
 	Matrix4 * modelMatrix;
+	Matrix4 * viewMatrix;
+	Matrix4 * MVP;
 
 	Vector3 m_v3Scale;
 	Vector3 m_v3Position;
@@ -54,10 +57,8 @@ public:
 	unsigned int m_uiTexture;
 	
 	// used later
-	Vec2 m_minUVCoords;
-	Vec2 m_maxUVCoords;
-	Vector3 m_uvScale;
-	Vector3 m_uvOffset;
+	Vec2 m_minUVCoords, m_maxUVCoords;
+	Vec2 m_texSize;//, m_uvOffset;
 
 	unsigned int m_uSourceBlendMode;
 	unsigned int m_uDestinationBlendMode;

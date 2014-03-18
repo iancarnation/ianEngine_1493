@@ -4,7 +4,7 @@ Matrix4 * Ortho;
 // keep track of window size for things like the viewport and the mouse cursor
 int g_gl_width = 1024;
 int g_gl_height = 768;
-
+double deltaTime = 0;
 
 void Orthographic(float a_fLeft, float a_fRight, float a_fTop, float a_fBottom, 
 				  float a_fNear, float a_fFar, Matrix4 * mat)
@@ -46,8 +46,29 @@ Vec2::Vec2(float x, float y)
 	fY = y;
 }
 
-void Vec2::operator = (const Vec2& a_rVecSource)
+Vec2 Vec2::operator = (const Vec2& a_rVecSource)
 {
 	fX = a_rVecSource.fX;
 	fY = a_rVecSource.fY;
+
+	return *this;
+}
+
+//Vec2 Vec2::operator / (const Vec2& a_rV2)
+//{
+//	Vec2 vTemp;
+//	vTemp.fX = this->fX / a_rV2.fX;
+//	vTemp.fY = this->fY / a_rV2.fY;
+//	return vTemp;
+//}
+
+double getDeltaTime()
+{
+	return deltaTime;
+}
+
+void resetDeltaTime()
+{
+	deltaTime = glfwGetTime();
+	glfwSetTime(0);
 }
