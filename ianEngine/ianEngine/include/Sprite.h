@@ -41,7 +41,14 @@ public:
 	void LoadTexture(const char* a_cpTexture);
 
 	void UVSetup();
-	
+
+	void SetPosition(Vector3 a_v3Pos);
+	void SetPosition(float a_fX, float a_fY);
+	Vector3 GetPosition();
+	void SetScale(Vec2 a_v2Scale);
+	void SetScale(float a_fX, float a_fY);
+	Vector3 GetScale();
+
 	GLFWwindow * GameWindow;
 
 // private:
@@ -63,6 +70,8 @@ public:
 	unsigned int m_uSourceBlendMode;
 	unsigned int m_uDestinationBlendMode;
 	int tex_loc, matrix_location, proj_location;
+
+	bool flipped;
 
 	//vector<UV> m_vSpriteSheet;
 };

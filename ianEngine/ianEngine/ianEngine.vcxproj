@@ -67,6 +67,7 @@
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="source\AnimSprite.cpp" />
+    <ClCompile Include="source\FontManager.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\GLlog.cpp" />
     <ClCompile Include="source\Quad.cpp" />
@@ -77,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="include\AnimSprite.h" />
+    <ClInclude Include="include\FontManager.h" />
     <ClInclude Include="include\GLlog.h" />
     <ClInclude Include="include\MathLibrary.h" />
     <ClInclude Include="include\Quad.h" />

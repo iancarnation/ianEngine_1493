@@ -3,8 +3,14 @@
 Sprite::Sprite()
 {
 	modelMatrix = new Matrix4();
+	viewMatrix = new Matrix4();
+	MVP = new Matrix4();
 
 	*modelMatrix = modelMatrix->CreateIdentity();
+	*viewMatrix = modelMatrix->CreateIdentity();
+	*MVP = modelMatrix->CreateIdentity();
+
+	matrix_location = glGetUniformLocation (m_ShaderProgram, "matrix"); //need?
 
 		modelMatrix->m14 = m_v3Position.m_fX;
 		modelMatrix->m24 = m_v3Position.m_fY;
@@ -64,10 +70,16 @@ Sprite::Sprite()
 	glBindVertexArray(0);
 	m_v3Scale = Vector3(1,1,1);
 	m_v3Position = Vector3(g_gl_width/2,g_gl_height/2,0);
+
+	flipped = false;
 }
 
 Sprite::~Sprite()
-{}
+{
+	delete modelMatrix;
+	delete viewMatrix;
+	delete MVP;
+}
 
 Sprite::Sprite(/*const char* a_cpType,*/ const char* a_cpTexture, /*float a_fSheetSlices(won't need with XML sheet info?),*/ int a_iWidth, int a_iHeight, Vector4 a_v4Color, 
 			   /*Vector3 a_v3Velocity,*/ /*Vector3 a_v3Force(gone with new physics?),*/ /*float a_fMass,*/ /*float a_fMovementPower(move to Entity child),*/ /*bool a_bAlive,*/ GLFWwindow* window)
@@ -76,6 +88,8 @@ Sprite::Sprite(/*const char* a_cpType,*/ const char* a_cpTexture, /*float a_fShe
 
 	m_v3Scale = Vector3(a_iWidth, a_iHeight, 1);
 	m_v3Position = Vector3(g_gl_width/2, g_gl_height/2, 0);
+
+	flipped = false;
 
 	modelMatrix = new Matrix4();
 
@@ -166,11 +180,13 @@ void Sprite::Draw()
 	modelMatrix->m24 = m_v3Position.m_fY;
 	modelMatrix->m34 = m_v3Position.m_fZ;
 
-	Matrix4 MVP = (*Ortho * *modelMatrix);
+	MVP = &(*Ortho * *modelMatrix);
 
-	glUniformMatrix4fv(matrix_location, 1, GL_TRUE, &MVP.m11);
+	glUniformMatrix4fv(matrix_location, 1, GL_TRUE, &MVP->m11);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
 	glBindVertexArray(m_VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+	glBufferData(GL_ARRAY_BUFFER, 4* sizeof(Vertex), m_aoVerts, GL_STATIC_DRAW);
 	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, 0);
 }
 
@@ -228,13 +244,57 @@ void Sprite::LoadTexture(const char* a_cpTexture)
 void Sprite::UVSetup()
 {
 	/*
-	UV Order:
-	[0]--[1]
-	 |    |
-	[2]--[3]
-	*/
+		UV Order:			Horizontal Flip:
+		[0]--[1]				[1]--[0]		
+		 |    |					 |    |
+		[2]--[3]				[3]--[2]
+						 move corresponding data						*/
+	if (!flipped)
+	{
 	m_aoVerts[0].UV = Vec2(m_minUVCoords.fX/m_texSize.fX, m_minUVCoords.fY/m_texSize.fY); 
 	m_aoVerts[1].UV = Vec2(m_maxUVCoords.fX/m_texSize.fX, m_minUVCoords.fY/m_texSize.fY);
 	m_aoVerts[2].UV = Vec2(m_minUVCoords.fX/m_texSize.fX, m_maxUVCoords.fY/m_texSize.fY);
 	m_aoVerts[3].UV = Vec2(m_maxUVCoords.fX/m_texSize.fX, m_maxUVCoords.fY/m_texSize.fY); 
+	}
+	else
+	{
+	// horizontal flip
+	m_aoVerts[0].UV = Vec2(m_maxUVCoords.fX/m_texSize.fX, m_minUVCoords.fY/m_texSize.fY);
+	m_aoVerts[1].UV = Vec2(m_minUVCoords.fX/m_texSize.fX, m_minUVCoords.fY/m_texSize.fY); 
+	m_aoVerts[2].UV = Vec2(m_maxUVCoords.fX/m_texSize.fX, m_maxUVCoords.fY/m_texSize.fY); 
+	m_aoVerts[3].UV = Vec2(m_minUVCoords.fX/m_texSize.fX, m_maxUVCoords.fY/m_texSize.fY);
+	}
+
+}
+
+void Sprite::SetPosition(Vector3 a_v3Pos)
+{
+	m_v3Position = a_v3Pos;
+}
+
+void Sprite::SetPosition(float a_fX, float a_fY)
+{
+	m_v3Position.m_fX = a_fX;
+	m_v3Position.m_fY = a_fY;
+}
+
+Vector3 Sprite::GetPosition()
+{
+	return m_v3Position;
+}
+
+void Sprite::SetScale(Vec2 a_v2Scale)
+{
+	m_v3Scale = Vector3(a_v2Scale.fX, a_v2Scale.fY, 1);
+}
+
+void Sprite::SetScale(float a_fX, float a_fY)
+{
+	m_v3Scale.m_fX = a_fX;
+	m_v3Scale.m_fY = a_fY;
+}
+
+Vector3 Sprite::GetScale()
+{
+	return m_v3Scale;
 }

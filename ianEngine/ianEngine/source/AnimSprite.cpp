@@ -9,7 +9,7 @@ AnimSprite::~AnimSprite()
 AnimSprite::AnimSprite(const char* a_cpTexture, GLFWwindow* window)
 {
 	GameWindow = window;
-
+	m_dElapsedTime = 0;
 	
 	m_v3Position = Vector3(g_gl_width/2, g_gl_height/2, 0);
 
@@ -26,19 +26,15 @@ AnimSprite::AnimSprite(const char* a_cpTexture, GLFWwindow* window)
 
 	m_dFrameDuration = (1.0/5.0);
 	m_sCurrentAnimation = "move N";
-	m_sCurrentSlice = "move N 0.png";
+	m_sCurrentSlice = "move N 0";
 	iCurrentFrame = 0;
+	iLoopMarker = 0;
 	currentCycle = LOOP;
 	m_texSize = m_atlas.v2Size;
 
 	SetSlice();
 	UVSetup();
 
-}
-
-void AnimSprite::Input()
-{
-	Sprite::Input();
 }
 
 void AnimSprite::Draw()
@@ -50,6 +46,7 @@ void AnimSprite::Update()
 {
 	Input();
 	Draw();
+	PlayAnimation();
 }
 
 void AnimSprite::SetSlice()
@@ -150,7 +147,7 @@ void AnimSprite::SetAnimation(std::string a_sAnimation, AnimCycle cycle, int fra
 {
 	m_sCurrentAnimation = a_sAnimation;
 	iCurrentFrame = 0;
-	iLoopMarker = 0;
+	iLoopMarker = frame;
 	currentCycle = cycle;
 
 	switch (cycle)
@@ -171,6 +168,7 @@ void AnimSprite::SetAnimation(std::string a_sAnimation, AnimCycle cycle, int fra
 	case SINGLE:
 		break;
 	default:
+		SetAnimation(a_sAnimation, cycle);
 		break;
 	}
 
@@ -181,11 +179,13 @@ void AnimSprite::SetAnimation(std::string a_sAnimation, AnimCycle cycle, int fra
 
 void AnimSprite::PlayAnimation()
 {
-	//m_dElapsedTime += getDeltaTime();
+	m_dElapsedTime += getDeltaTime();
 
 	// if the elapsed time is greater than desired frame duration:
 	if (m_dElapsedTime > m_dFrameDuration)
 	{
+		m_dElapsedTime = 0;
+
 		switch(currentCycle)
 		{
 			//case ONCE, if not at the end of the animation, advance one frame
@@ -201,14 +201,45 @@ void AnimSprite::PlayAnimation()
 			if (m_mAnimations.at(m_sCurrentAnimation)[iCurrentFrame] == m_mAnimations.at(m_sCurrentAnimation).back())
 			{
 				iCurrentFrame = iLoopMarker;
+				m_sCurrentSlice = m_mAnimations.at(m_sCurrentAnimation)[iCurrentFrame];
 			}
 			else
 			{
-
+				iCurrentFrame++;
+				m_sCurrentSlice = m_mAnimations.at(m_sCurrentAnimation)[iCurrentFrame];
 			}
 			break;
 		}
 		SetSlice();
 		UVSetup();
 	}
+}
+
+void AnimSprite::Input()
+{
+	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_W))
+	{
+		m_v3Position += Vector3(0.0f, 1.0f, 0.0f);
+		SetAnimation("move N", LOOP);
+	}	
+
+	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_A))
+	{
+		m_v3Position += Vector3(-1.0f, 0.0f, 0.0f);
+		flipped = true;
+		SetAnimation("move E", LOOP);
+	}	
+
+	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_S))
+	{
+		m_v3Position += Vector3(0.0f, -1.0f, 0.0f);
+		SetAnimation("move S", LOOP);
+	}	
+
+	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_D))
+	{
+		m_v3Position += Vector3(1.0f, 0.0f, 0.0f);
+		flipped = false;
+		SetAnimation("move E", LOOP);
+	}	
 }

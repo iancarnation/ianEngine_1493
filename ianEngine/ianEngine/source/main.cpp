@@ -9,6 +9,7 @@
 #include "Quad.h"
 #include "Sprite.h"
 #include "AnimSprite.h"
+#include "FontManager.h"
 
 // a call-back function
 void glfw_window_size_callback (GLFWwindow* window, int width, int height) {
@@ -26,6 +27,7 @@ void glfw_error_callback (int error, const char* description) {
 
 int main()
 {
+	resetDeltaTime();
 	//setup to log some GLFW stuff
 
 	char message[256];
@@ -90,56 +92,38 @@ int main()
 	//Sprite * richard = new Sprite("./resources/simmons.png", 384, 324, Vector4(1,1,1,1), window); 
 	AnimSprite* tester = new AnimSprite("./resources/sheet.xml", window);
 
-	//int matrix_location = glGetUniformLocation (shaderProgram, "matrix");
-	//glUniform1i(glGetUniformLocation(shaderProgram, "Texture"), 0);
+	FontManager Font;
+	Font.LoadFont("./resources/FontSheet.xml");
 
 	Ortho = new Matrix4();
 	Orthographic(0, g_gl_width, g_gl_height, 0, 0, -1, Ortho);
 
 	while (!glfwWindowShouldClose (window)) {
 
-		/* add a timer for doing animation
-  static double previous_seconds = glfwGetTime ();
-  double current_seconds = glfwGetTime ();
-  double elapsed_seconds = current_seconds - previous_seconds;
-  previous_seconds = current_seconds;
-   // reverse direction when going to far left or right
-  if (fabs(last_position) > 1.0f) {
-    speed = -speed;
-  }
-  */
-
 		glEnable (GL_CULL_FACE); // cull face
 		glCullFace (GL_BACK); // cull back face
 		glFrontFace (GL_CW); // GL_CCW for counter clock-wise
 
+		glEnable (GL_ALPHA_TEST);
+		glAlphaFunc (GL_GREATER, 0.5);
+		glEnable (GL_ALPHA);
+
+		glClearColor(0.4, 0.75, 0.9, 1.0);
+
 		// wipe the drawing surface clear
 		glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//resize window
+		//resize window3
 		glViewport (0, 0, g_gl_width, g_gl_height);
 
-	
+		tester->Update();
 		
-		  // update the matrix
-//  matrix[12] = elapsed_seconds * speed + last_position;
-//  last_position = matrix[12];
-		//set the shader for this VAO
-//		glUseProgram (shaderProgram);
-		//Here is where we attach the marix
-//		glUniformMatrix4fv (matrix_location, 1, GL_FALSE, matrix);
-		//bind the VAO to be drawn
-//		glBindVertexArray (VAO);
-		// draw points 0-3 from the currently bound VAO with current in-use shader
-//		glDrawArrays (GL_TRIANGLES, 0, 3);
+		Font.DrawString("1493 - The Bay of Arrows", Vec2(20,20), 1);
 
-		//richard->Input();
-		//richard->Draw();
-		tester->Draw();
-		// update other events like input handling 
 		glfwPollEvents ();
 		// put the stuff we've been drawing onto the display
 		glfwSwapBuffers (window);
 
+		resetDeltaTime();
 
 		//When do i exit?
 		if (GLFW_PRESS == glfwGetKey (window, GLFW_KEY_ESCAPE)) {
