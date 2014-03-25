@@ -142,13 +142,13 @@ void FontManager::DrawString(std::string a_string, Vec2 a_v2Pos, float a_fScale)
 			// new position = iSprite's pos + half this char's width + half previous char's width + kerning
 			newPos = m_iSprite.GetPosition().m_fX + c.fWidth/2.0 + m_vDrawList[i-1].fWidth/2.0 + m_FontAtlas.fKerning;
 			// move iSprite position to new char's position
-			m_iSprite.SetPosition(newPos, a_v2Pos.fY);
+			m_iSprite.SetPosition(newPos, a_v2Pos.fY - c.fOffset);
 		}
 	//// if it is the first character: set position, minmax UV, scale, UVsetup, modelMatrix
 
 			// set initial position
 		else
-			m_iSprite.SetPosition(Vector3(a_v2Pos.fX + c.fWidth/2.0, a_v2Pos.fY, 0));
+			m_iSprite.SetPosition(Vector3(a_v2Pos.fX + c.fWidth/2.0, a_v2Pos.fY - c.fOffset, 0));
 
 		// UVs and scale
 		m_iSprite.m_minUVCoords = c.v2minUV;
@@ -158,17 +158,17 @@ void FontManager::DrawString(std::string a_string, Vec2 a_v2Pos, float a_fScale)
 		// set vertex UV data
 		m_iSprite.UVSetup();
 
-		// set model matrix data
-		m_iSprite.modelMatrix->m11 = m_iSprite.GetScale().m_fX;
-		m_iSprite.modelMatrix->m22 = m_iSprite.GetScale().m_fY;
-		m_iSprite.modelMatrix->m14 = m_iSprite.GetPosition().m_fX;
-		m_iSprite.modelMatrix->m24 = m_iSprite.GetPosition().m_fY - c.fOffset;
-		m_iSprite.modelMatrix->m34 = m_iSprite.GetPosition().m_fZ;
+	//	// set model matrix data
+	//	m_iSprite.modelMatrix->m11 = m_iSprite.GetScale().m_fX;
+	//	m_iSprite.modelMatrix->m22 = m_iSprite.GetScale().m_fY;
+	//	m_iSprite.modelMatrix->m14 = m_iSprite.GetPosition().m_fX;
+	//	m_iSprite.modelMatrix->m24 = m_iSprite.GetPosition().m_fY - c.fOffset;
+	//	m_iSprite.modelMatrix->m34 = m_iSprite.GetPosition().m_fZ;
 
-	////   set MVP
-		m_iSprite.MVP = &(*Ortho * *m_iSprite.modelMatrix);
-	////   Draw
-		glUniformMatrix4fv(m_iSprite.matrix_location, 1, GL_TRUE, &m_iSprite.MVP->m11);
+	//////   set MVP
+	//	m_iSprite.MVP = &(*Ortho * *m_iSprite.modelMatrix);
+	//////   Draw
+	//	glUniformMatrix4fv(m_iSprite.matrix_location, 1, GL_TRUE, &m_iSprite.MVP->m11);
 		m_iSprite.Draw();
 	}
 }

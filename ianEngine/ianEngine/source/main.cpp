@@ -117,7 +117,7 @@ int main()
 
 		tester->Update();
 		
-		Font.DrawString("1493 - The Bay of Arrows", Vec2(20,20), 1);
+		Font.DrawString("1493 - The Bay of Arrows", Vec2(20,40), 1);
 
 		glfwPollEvents ();
 		// put the stuff we've been drawing onto the display

@@ -148,6 +148,7 @@ void AnimSprite::SetAnimation(std::string a_sAnimation, AnimCycle cycle, int fra
 	m_sCurrentAnimation = a_sAnimation;
 	iCurrentFrame = 0;
 	iLoopMarker = frame;
+	iPlayDirection = 1;
 	currentCycle = cycle;
 
 	switch (cycle)
@@ -209,6 +210,27 @@ void AnimSprite::PlayAnimation()
 				m_sCurrentSlice = m_mAnimations.at(m_sCurrentAnimation)[iCurrentFrame];
 			}
 			break;
+		case PINGPONG:
+			// if at the end of animation, change direction
+			if (m_mAnimations.at(m_sCurrentAnimation)[iCurrentFrame] == m_mAnimations.at(m_sCurrentAnimation).back())
+			{
+				iPlayDirection = -1;
+				iCurrentFrame += iPlayDirection;
+				m_sCurrentSlice = m_mAnimations.at(m_sCurrentAnimation)[iCurrentFrame];
+			}
+			// if at the beginning, change direction
+			else if (m_mAnimations.at(m_sCurrentAnimation)[iCurrentFrame] == m_mAnimations.at(m_sCurrentAnimation).front())
+			{
+				iPlayDirection = 1;
+				iCurrentFrame += iPlayDirection;
+				m_sCurrentSlice = m_mAnimations.at(m_sCurrentAnimation)[iCurrentFrame];
+			}
+			else 
+			{
+				iCurrentFrame += iPlayDirection;
+				m_sCurrentSlice = m_mAnimations.at(m_sCurrentAnimation)[iCurrentFrame];
+			}
+			break;
 		}
 		SetSlice();
 		UVSetup();
@@ -220,26 +242,59 @@ void AnimSprite::Input()
 	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_W))
 	{
 		m_v3Position += Vector3(0.0f, 1.0f, 0.0f);
-		SetAnimation("move N", LOOP);
+		if (m_sCurrentAnimation != "move N")
+			SetAnimation("move N", PINGPONG);
 	}	
 
 	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_A))
 	{
 		m_v3Position += Vector3(-1.0f, 0.0f, 0.0f);
 		flipped = true;
-		SetAnimation("move E", LOOP);
+		if (m_sCurrentAnimation != "move E")
+			SetAnimation("move E", PINGPONG);
 	}	
 
 	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_S))
 	{
 		m_v3Position += Vector3(0.0f, -1.0f, 0.0f);
-		SetAnimation("move S", LOOP);
+		if (m_sCurrentAnimation != "move S")
+			SetAnimation("move S", PINGPONG);
 	}	
 
 	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_D))
 	{
 		m_v3Position += Vector3(1.0f, 0.0f, 0.0f);
 		flipped = false;
-		SetAnimation("move E", LOOP);
+		if (m_sCurrentAnimation != "move E")
+			SetAnimation("move E", PINGPONG);
 	}	
+
+	// diagonals
+	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_W) && GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_D))
+	{
+		flipped = false;
+		if (m_sCurrentAnimation != "move NE")
+			SetAnimation("move NE", PINGPONG);
+	}
+
+	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_S) && GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_D))
+	{
+		flipped = false;
+		if (m_sCurrentAnimation != "move SE")
+			SetAnimation("move SE", PINGPONG);
+	}
+
+	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_W) && GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_A))
+	{
+		flipped = true;
+		if (m_sCurrentAnimation != "move NE")
+			SetAnimation("move NE", PINGPONG);
+	}
+
+	if (GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_S) && GLFW_PRESS == glfwGetKey(GameWindow, GLFW_KEY_A))
+	{
+		flipped = true;
+		if (m_sCurrentAnimation != "move SE")
+			SetAnimation("move SE", PINGPONG);
+	}
 }

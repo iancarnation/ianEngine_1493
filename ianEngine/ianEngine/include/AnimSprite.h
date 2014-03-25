@@ -45,7 +45,7 @@ public:
 	Atlas m_atlas;
 
 	std::string m_sCurrentAnimation, m_sCurrentSlice;
-	int iCurrentFrame, iLoopMarker;
+	int iCurrentFrame, iLoopMarker, iPlayDirection;
 	AnimCycle currentCycle;
 	double m_dElapsedTime, m_dFrameDuration;
 };
